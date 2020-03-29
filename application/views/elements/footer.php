@@ -1,5 +1,5 @@
 <footer class="mt-5 p-3" style="border-top-style: solid; border-top-color: #ceaa63;color:#ceaa63;">
-	<p class="text-center">Do Pokoju &copy; 2020</p>
+	<p class="text-center">Do Pokoju &copy; 2020 Copyright</p>
 </footer>
 </div>
 <!-- asd -->
