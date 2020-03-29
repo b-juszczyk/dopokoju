@@ -11,8 +11,10 @@
 	?>
 
 	<div class="container-fluid text-center p-2" style="color:#ceaa63">
+		<div class="d-flex h-100">
+			<div class="m-auto">
 		<h2>Rejestracja</h2>
-		<form action="" method="post" class="col-lg-4 col-sm-12  align-items-center  justify-content-center">
+		<form action="" method="post">
 			<div class="form-group">
 				<input type="text" name="first_name" class="form-control" placeholder="Imię" value="<?php echo !empty($user['first_name'])?$user['first_name']:''; ?>" required>
 				<?php echo form_error('first_name','<p class="alert-warning">','</p>'); ?>
@@ -25,16 +27,17 @@
 				<input type="email" name="email" placeholder="Email" required="" class="form-control">
 				<?php echo form_error('email','<p class="alert-warning">','</p>'); ?>
 			</div>
-			<div class="form-group">
+			<div class="form-group d-inline-flex">
 				<input type="password" name="password" placeholder="Password" required="" class="form-control">
 				<?php echo form_error('password','<p class="alert-warning">','</p>'); ?>
 			</div>
-			<div class="form-group">
+			<div class="form-group d-inline-flex">
 				<input type="password" name="conf_password" placeholder="Powtórz hasło" class="form-control" required>
 				<?php echo form_error('conf_password','<p class="alert-warning">','</p>'); ?>
 			</div>
-			<input type="submit" name="signupSubmit" value="Zarejestruj" class="btn btn-dark">
+			<input type="submit" name="signupSubmit" value="Zarejestruj" class="form-control w-25 btn btn-dark">
 		</form>
 		<p>Masz już konto? <a href="<?php echo base_url('user/login'); ?>">Zaloguj się</a></p>
-
+			</div>
+			</div>
 	</div>
