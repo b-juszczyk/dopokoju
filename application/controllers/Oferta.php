@@ -1,5 +1,5 @@
 <?php
-
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Oferta extends CI_Controller
 {
@@ -16,6 +16,20 @@ class Oferta extends CI_Controller
 		$this->load->view('elements/header',$data);
 		$this->load->view('oferta',$data);
 		$this->load->view('elements/footer');
+	}
+	public function addToCart($productId)
+	{
+		$product = $this->oferta_model->getRows($productId);
+
+		$data = array(
+			'id'=>$product['id'],
+			'ilosc'=>1,
+			'cena'=>$product['cena'],
+			'nazwa'=>$product['nazwa']
+		);
+		$this->cart->insert($data);
+
+		redirect('koszyk/');
 	}
 
 }
