@@ -11,25 +11,15 @@ class Oferta extends CI_Controller
 
 	public function index()
 	{
-		$data['oferta']=$this->oferta_model->getOferta();
-		$data['logged']=$this->session->userdata('isUserLoggedIn');
-		$this->load->view('elements/header',$data);
-		$this->load->view('oferta',$data);
+		$data = array(
+			'oferta' => $this->oferta_model->getOferta(),
+			'logged' => $this->session->userdata('isUserLoggedIn'),
+			'loggedAdmin' => $this->session->userdata('isAdminLoggedIn')
+		);
+		$this->load->view('elements/header', $data);
+		$this->load->view('oferta', $data);
 		$this->load->view('elements/footer');
 	}
-	public function addToCart($productId)
-	{
-		$product = $this->oferta_model->getRows($productId);
 
-		$data = array(
-			'id'=>$product['id'],
-			'ilosc'=>1,
-			'cena'=>$product['cena'],
-			'nazwa'=>$product['nazwa']
-		);
-		$this->cart->insert($data);
-
-		redirect('koszyk/');
-	}
 
 }

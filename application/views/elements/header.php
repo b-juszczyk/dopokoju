@@ -13,7 +13,7 @@
 </head>
 <body style="background-color: #231f20">
 <div id="page">
-	<nav class="navbar navbar-expand-lg navbar-light fixed-top"
+	<nav class="navbar navbar-expand-lg navbar-light"
 		 style="background-color: #231f20; border-bottom-style: solid; border-bottom-color: #ceaa63;">
 		<div class="d-flex flex-grow-1">
 			<span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
@@ -32,29 +32,34 @@
 		<div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
 			<ul class="navbar-nav ml-auto flex-nowrap">
 				<li class="nav-item">
-					<a href="<?php echo base_url('oferta/');?>" class="nav-link m-2 menu-item nav-active">
-						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63" aria-pressed="true"><i class="fas fa-utensils pr-1"></i> Oferta</button>
+					<a href="<?php echo base_url('oferta/'); ?>" class="nav-link m-2 menu-item nav-active">
+						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"
+								aria-pressed="true"><i class="fas fa-utensils pr-1"></i> Oferta
+						</button>
 					</a>
 				</li>
 				<?php
-				if(!($logged))
-				{
+				if ($logged) {
 					echo '<li class="nav-item">
-					<a href="'.base_url('user/login').'" class="nav-link m-2 menu-item">
+					<a href="' . base_url('user/account') . '" class="nav-link m-2 menu-item">
+						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-user pr-1"></i>Moje konto</button>
+					</a>
+				</li>';
+				} elseif ($loggedAdmin) {
+					echo '<li class="nav-item">
+					<a href="#" class="nav-link m-2 menu-item">
+						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-tools pr-1"></i>Panel admina</button>
+					</a>
+				</li>';
+				} else {
+					echo '<li class="nav-item">
+					<a href="' . base_url('user/login') . '" class="nav-link m-2 menu-item">
 						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-user pr-1"></i>Logowanie</button>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="'.base_url('user/registration').'"class="nav-link m-2 menu-item">
+					<a href="' . base_url('user/registration') . '"class="nav-link m-2 menu-item">
 						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-user-plus pr-1"></i>Rejestracja</button>
-					</a>
-				</li>';
-				}
-				else
-				{
-					echo '<li class="nav-item">
-					<a href="'.base_url('user/account').'" class="nav-link m-2 menu-item">
-						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-user pr-1"></i>Moje konto</button>
 					</a>
 				</li>';
 				}
@@ -68,6 +73,4 @@
 			</ul>
 		</div>
 	</nav>
-	<div id="welcome_bar" class="container-fluid rounded-lg pt-4 pb-3 mb-5" style="background-color: #2f2f2f">
-		<p class="text-center" style="color:#ceaa63">Mmm głodny? Kebsa? ZAMAWIAJ TYPIE!!!</p>
-	</div>
+

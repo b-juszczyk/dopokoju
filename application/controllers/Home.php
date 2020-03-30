@@ -11,7 +11,8 @@ class Home extends CI_Controller{
 	public function index()
 	{
 		$data['logged'] = $this->session->userdata('isUserLoggedIn');
-		$this->load->view('elements/header',$data);
+		$data['loggedAdmin'] = $this->session->userdata('isAdminLoggedIn');
+		$this->load->view('elements/header', $data);
 		$this->load->view('home');
 		$this->load->view('elements/footer');
 	}

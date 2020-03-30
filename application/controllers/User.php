@@ -10,11 +10,12 @@ class User extends CI_Controller
 		$this->load->library('form_validation');
 
 		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
+		$this->isAdminLoggedIn = $this->session->userdata('isAdminLoggedIn');
 	}
 
 	public function index()
 	{
-		if ($this->isUserLoggedIn) {
+		if ($this->isUserLoggedIn || $this->isAdminLoggedIn) {
 			redirect('user/account');
 		} else {
 			redirect('user/login');
@@ -24,12 +25,13 @@ class User extends CI_Controller
 	public function account()
 	{
 		$data = array();
-		if ($this->isUserLoggedIn) {
+		if ($this->isUserLoggedIn || $this->isAdminLoggedIn) {
 			$con = array(
 				'id' => $this->session->userdata('userId')
 			);
 			$data['user'] = $this->user_model->getRows($con);
-			$data['logged']=$this->isUserLoggedIn;
+			$data['logged'] = $this->isUserLoggedIn;
+			$data['loggedAdmin'] = $this->isAdminLoggedIn;
 
 			$this->load->view('elements/header', $data);
 			$this->load->view('user/account', $data);
@@ -73,11 +75,29 @@ class User extends CI_Controller
 				} else {
 					$data['error_msg'] = 'Wrong email or password!';
 				}
+
+				$con = array(
+					'returnType' => 'single',
+					'conditions' => array(
+						'email' => $this->input->post('email'),
+						'password' => md5($this->input->post('password')),
+						'status' => 2
+					)
+				);
+				$checkAdmin = $this->user_model->getRows($con);
+				if ($checkAdmin) {
+					$this->session->set_userdata('isAdminLoggedIn', TRUE);
+					$this->session->set_userdata('userId', $checkLogin['id']);
+					redirect('user/account');
+				} else {
+					$data['error_msg'] = 'Wrong email or password!';
+				}
 			} else {
 				$data['error_msg'] = 'Please fill all fields';
 			}
 		}
-		$data['logged']=$this->isUserLoggedIn;
+		$data['logged'] = $this->isUserLoggedIn;
+		$data['loggedAdmin'] = $this->isAdminLoggedIn;
 		$this->load->view('elements/header', $data);
 		$this->load->view('user/login', $data);
 		$this->load->view('elements/footer');
@@ -116,23 +136,23 @@ class User extends CI_Controller
 				}
 
 
-			}
-			else
-			{
+			} else {
 				$data['error_msg'] = 'Fill all fields!';
 			}
 		}
 
 		$data['user'] = $userData;
-		$data['logged']=$this->isUserLoggedIn;
-		$this->load->view('elements/header',$data);
-		$this->load->view('user/registration',$data);
+		$data['logged'] = $this->isUserLoggedIn;
+		$data['loggedAdmin'] = $this->isAdminLoggedIn;
+		$this->load->view('elements/header', $data);
+		$this->load->view('user/registration', $data);
 		$this->load->view('elements/footer');
 	}
 
 	public function logout()
 	{
 		$this->session->unset_userdata('isUserLoggedIn');
+		$this->session->unset_userdata('isAdminLoggedIn');
 		$this->session->unset_userdata('userId');
 		$this->session->sess_destroy();
 		redirect('user/login');
