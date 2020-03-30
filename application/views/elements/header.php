@@ -8,6 +8,7 @@
 	<title>Do Pokoju</title>
 
 	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="../../user_guide/_static/css/simple-sidebar.css"/>
 	<link rel="stylesheet" href="../../user_guide/_static/css/bootstrap.min.css"/>
 	<link rel="icon" type="image/gif" href="<?php echo base_url(); ?>/favicon.gif"/>
 </head>
@@ -47,8 +48,13 @@
 				</li>';
 				} elseif ($loggedAdmin) {
 					echo '<li class="nav-item">
-					<a href="#" class="nav-link m-2 menu-item">
+					<a href="' . base_url('admin/') . '" class="nav-link m-2 menu-item">
 						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-tools pr-1"></i>Panel admina</button>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="' . base_url('user/account') . '" class="nav-link m-2 menu-item">
+						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-user pr-1"></i>Moje konto</button>
 					</a>
 				</li>';
 				} else {

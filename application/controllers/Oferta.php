@@ -17,7 +17,7 @@ class Oferta extends CI_Controller
 			'loggedAdmin' => $this->session->userdata('isAdminLoggedIn')
 		);
 		$this->load->view('elements/header', $data);
-		$this->load->view('oferta', $data);
+		$this->load->view('oferta/index', $data);
 		$this->load->view('elements/footer');
 	}
 

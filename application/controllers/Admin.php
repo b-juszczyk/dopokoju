@@ -10,13 +10,21 @@ class Admin extends CI_Controller
 		$this->load->model('admin_model');
 	}
 
-	public function index()
+	public function index($cardName = 'index')
 	{
-		$data['loggedAdmin'] = $this->session->userdata['isAdminLoggedIn'];
-		$this->load->view('elements/header', $data);
-		$this->load->view('admin/left-panel');
-		$this->load->view('admin/index', $data);
-		$this->load->view('elements/footer');
+		$data['logged'] = $this->session->userdata('isUserLoggedIn');
+		$data['loggedAdmin'] = $this->session->userdata('isAdminLoggedIn');
+		if ($cardName === 'users') {
+			$data['userRows'] = $this->admin_model->getUsers();
+		}
+		if ($data['loggedAdmin']) {
+			$this->load->view('elements/header', $data);
+			$this->load->view('admin/left_panel');
+			$this->load->view('admin/' . $cardName, $data);
+			$this->load->view('elements/footer');
+		} else {
+			redirect('/');
+		}
 	}
 
 

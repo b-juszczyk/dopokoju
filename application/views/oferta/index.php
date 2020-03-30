@@ -4,9 +4,7 @@
 		<h4 class="mr-2"><?php echo $item['nazwa']; ?></h4>
 		<p><?php echo $item['cena']; ?></p>
 		<a href="#">
-			<input type="text"
 			<button class="btn btn-dark" type="button" role="button">Dodaj do koszyka</button>
 		</a>
-
 	</div>
 <?php } ?>
