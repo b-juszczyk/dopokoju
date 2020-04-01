@@ -5,7 +5,7 @@ class Oferta_model extends CI_Model
 {
 	public function getOferta()
 	{
-		$query = $this->db->query('SELECT id, nazwa, cena FROM oferta');
+		$query = $this->db->query('SELECT id, nazwa, cena, zdjecie FROM oferta');
 		return $query->result_array();
 	}
 
