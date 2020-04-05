@@ -33,38 +33,45 @@
 		<div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
 			<ul class="navbar-nav ml-auto flex-nowrap">
 				<li class="nav-item">
-					<a href="<?php echo base_url('oferta/'); ?>" class="nav-link m-2 menu-item nav-active">
+					<a href="<?php echo site_url('oferta'); ?>" class="nav-link m-2 menu-item nav-active">
 						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"
 								aria-pressed="true"><i class="fas fa-utensils pr-1"></i> Oferta
+						</button>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="<?php echo site_url('cart'); ?>" class="nav-link m-2 menu-item nav-active">
+						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"
+								aria-pressed="true"><i class="fas fa-shopping-cart pr-1"></i> Koszyk
 						</button>
 					</a>
 				</li>
 				<?php
 				if ($logged) {
 					echo '<li class="nav-item">
-					<a href="' . base_url('user/account') . '" class="nav-link m-2 menu-item">
+					<a href="' . site_url('user/account') . '" class="nav-link m-2 menu-item">
 						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-user pr-1"></i>Moje konto</button>
 					</a>
 				</li>';
 				} elseif ($loggedAdmin) {
 					echo '<li class="nav-item">
-					<a href="' . base_url('admin/') . '" class="nav-link m-2 menu-item">
+					<a href="' . site_url('admin/') . '" class="nav-link m-2 menu-item">
 						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-tools pr-1"></i>Panel admina</button>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="' . base_url('user/account') . '" class="nav-link m-2 menu-item">
+					<a href="' . site_url('user/account') . '" class="nav-link m-2 menu-item">
 						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-user pr-1"></i>Moje konto</button>
 					</a>
 				</li>';
 				} else {
 					echo '<li class="nav-item">
-					<a href="' . base_url('user/login') . '" class="nav-link m-2 menu-item">
+					<a href="' . site_url('user/login') . '" class="nav-link m-2 menu-item">
 						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-user pr-1"></i>Logowanie</button>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="' . base_url('user/registration') . '"class="nav-link m-2 menu-item">
+					<a href="' . site_url('user/registration') . '"class="nav-link m-2 menu-item">
 						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-user-plus pr-1"></i>Rejestracja</button>
 					</a>
 				</li>';
@@ -72,8 +79,10 @@
 				?>
 
 				<li class="nav-item">
-					<a href="<?php echo base_url('info');?>" class="nav-link m-2 menu-item">
-						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i class="fas fa-info pr-1"></i>Informacje</button>
+					<a href="<?php echo site_url('info'); ?>" class="nav-link m-2 menu-item">
+						<button type="button" class="btn btn-dark" role="button" style="color:#ceaa63"><i
+								class="fas fa-info pr-1"></i>Informacje
+						</button>
 					</a>
 				</li>
 			</ul>

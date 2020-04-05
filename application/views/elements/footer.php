@@ -11,6 +11,38 @@
 <script src="https://kit.fontawesome.com/70ad159df0.js" crossorigin="anonymous"></script>
 <script>
 	$('[data-toggle="popover"]').popover();
+	$('#dostawa').click(function () {
+		if ($(this).is(':checked')) {
+			$("#adres").show();
+		} else {
+			$("#adres").hide();
+		}
+	});
+	$('#wszystkieBut').click(function () {
+		$('#wszystkie').show();
+		$('#kebab').hide();
+		$('#frytki').hide();
+		$('#zapiekanki').hide();
+	});
+	$('#kebabBut').click(function () {
+		$('#wszystkie').hide();
+		$('#kebab').show();
+		$('#frytki').hide();
+		$('#zapiekanki').hide();
+	});
+	$('#zapiekankiBut').click(function () {
+		$('#wszystkie').hide();
+		$('#kebab').hide();
+		$('#frytki').hide();
+		$('#zapiekanki').show();
+	});
+	$('#frytkiBut').click(function () {
+		$('#wszystkie').hide();
+		$('#kebab').hide();
+		$('#frytki').show();
+		$('#zapiekanki').hide();
+	});
+
 </script>
 </body>
 </html>
