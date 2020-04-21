@@ -44,7 +44,7 @@ class Cart extends CI_Controller
 			$product = $this->oferta_model->getProdukt($id);
 		}
 		$item = array(
-			'id' => $product->id,
+			'id' => $product->id_oferta,
 			'nazwa' => $product->nazwa,
 			'cena' => $product->cena,
 			'zdjecie' => $product->zdjecie,
@@ -114,6 +114,12 @@ class Cart extends CI_Controller
 			$this->form_validation->set_rules('mail', 'Mail', 'required|valid_email');
 
 			if ($this->form_validation->run() == true) {
+				$this->session->set_userdata('name', $this->input->post('name'));
+				$this->session->set_userdata('mail', $this->input->post('mail'));
+				$this->session->set_userdata('phone', $this->input->post('phone'));
+				$this->session->set_userdata('uwagi', $this->input->post('uwagi'));
+				$this->session->set_userdata('akademik', $this->input->post('academic'));
+				$this->session->set_userdata('nr_pokoju', $this->input->post('room'));
 				redirect('cart/summary');
 			} else {
 				$this->session->set_userdata('error_msg', 'Wszystkie pola są wymagane!');
@@ -144,9 +150,7 @@ class Cart extends CI_Controller
 			$data['items'] = array_values(unserialize($this->session->userdata('cart')));
 		}
 		$data['total'] = $this->total();
-		$this->session->set_userdata('name', $this->input->post('name'));
-		$this->session->set_userdata('mail', $this->input->post('mail'));
-		$this->session->set_userdata('phone', $this->input->post('phone'));
+
 		$data['logged'] = $this->session->userdata('isUserLoggedIn');
 		$data['loggedAdmin'] = $this->session->userdata('isAdminLoggedIn');
 
@@ -162,8 +166,36 @@ class Cart extends CI_Controller
 			'mail' => strip_tags($this->session->userdata('mail')),
 			'phone' => strip_tags($this->session->userdata('phone'))
 		);
-		$insert = $this->order_model->insert($userData);
-		if ($insert) {
+		if (!($this->session->has_userdata('isUserLoggedIn') || $this->session->has_userdata('isAdminLoggedIn'))) {
+			$insertNewCustomer = $this->user_model->insertNewCustomer($userData);
+		}
+		if ($this->session->has_userdata('isUserLoggedIn') || $this->session->has_userdata('isAdminLoggedIn')) {
+			$orderData = array(
+				'czas' => $this->session->flashdata('czas'),
+				'data_zamowienia' => date('Y-m-d H:i:s'),
+				'dostawa' => $this->session->flashdata('dostawa'),
+				'uwagi' => $this->session->flashdata('uwagi'),
+				'kod_odbioru' => rand(100000, 999999),
+				'na_wynos' => $this->session->flashdata('na_wynos'),
+				'users_id' => strip_tags($this->session->userdata('userId'))
+			);
+		} else {
+			$orderData = array(
+				'czas' => $this->session->flashdata('czas'),
+				'data_zamowienia' => date('Y-m-d H:i:s'),
+				'dostawa' => $this->session->flashdata('dostawa'),
+				'uwagi' => $this->session->flashdata('uwagi'),
+				'kod_odbioru' => rand(100000, 9999999),
+				'na_wynos' => $this->session->flashdata('na_wynos'),
+				'niezalogowani_id' => $insertNewCustomer
+			);
+		}
+
+		$insertOrder = $this->order_model->insertOrder($orderData);
+		$insertFood = $this->order_model->insertFood($this->session->userdata('cart'), $insertOrder);
+
+
+		if ($insertFood && $insertOrder) {
 			$this->session->set_userdata('success_msg', 'Zamówienie złożone poprawnie!');
 			$this->session->unset_userdata('cart');
 			$this->session->unset_userdata('name');

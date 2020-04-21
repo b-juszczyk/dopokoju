@@ -2,8 +2,7 @@
 	<p class="text-center">Do Pokoju &copy; 2020 Copyright</p>
 </footer>
 </div>
-<!-- asd -->
-<!-- Bootstrap, jQuery, Popper, FontAwesome JS -->
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -18,26 +17,17 @@
 			$("#adres").hide();
 		}
 	});
-	$('#wszystkieBut').click(function () {
-		$('#wszystkie').show();
-		$('#kebab').hide();
-		$('#frytki').hide();
-		$('#zapiekanki').hide();
-	});
 	$('#kebabBut').click(function () {
-		$('#wszystkie').hide();
 		$('#kebab').show();
 		$('#frytki').hide();
 		$('#zapiekanki').hide();
 	});
 	$('#zapiekankiBut').click(function () {
-		$('#wszystkie').hide();
 		$('#kebab').hide();
 		$('#frytki').hide();
 		$('#zapiekanki').show();
 	});
 	$('#frytkiBut').click(function () {
-		$('#wszystkie').hide();
 		$('#kebab').hide();
 		$('#frytki').show();
 		$('#zapiekanki').hide();

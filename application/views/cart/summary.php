@@ -58,7 +58,10 @@
 		<div class="card-body" style="color:#ceaa63; background-color: #231f20">
 			<b>Imię: </b><?php echo $_SESSION['name']; ?><br>
 			<b>Adres e-mail: </b><?php echo $_SESSION['mail']; ?><br>
-			<b>Telefon: </b><?php echo $_SESSION['phone']; ?>
+			<b>Telefon: </b><?php echo $_SESSION['phone']; ?><br>
+			<b>Akademik: </b><?php echo $_SESSION['akademik'] ?><br>
+			<b>Numer pokoju: </b><?php echo $_SESSION['nr_pokoju'] ?><br>
+			<b>Uwagi do zamówienia: </b><br><?php echo $_SESSION['uwagi'] ?>
 		</div>
 		<div class="card-footer" style="background-color: #231f20">
 			<div class="row">

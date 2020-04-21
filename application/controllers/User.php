@@ -87,7 +87,7 @@ class User extends CI_Controller
 				$checkAdmin = $this->user_model->getRows($con);
 				if ($checkAdmin) {
 					$this->session->set_userdata('isAdminLoggedIn', TRUE);
-					$this->session->set_userdata('userId', $checkLogin['id']);
+					$this->session->set_userdata('userId', $checkAdmin['id']);
 					redirect('user/account');
 				} else {
 					$data['error_msg'] = 'Wrong email or password!';
@@ -107,31 +107,36 @@ class User extends CI_Controller
 	{
 		$data = $userData = array();
 
-		if($this->input->post('signupSubmit'))
-		{
+		if($this->input->post('signupSubmit')) {
 			$this->form_validation->set_rules('first_name', 'First Name', 'required');
 			$this->form_validation->set_rules('login', 'Login', 'required');
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 			$this->form_validation->set_rules('password', 'Password', 'required');
 			$this->form_validation->set_rules('conf_password', 'Confirm Password', 'required|matches[password]');
+			$this->form_validation->set_rules('phone', 'Phone', 'required');
+			$this->form_validation->set_rules('academic', 'Academic', 'required');
+			$this->form_validation->set_rules('room', 'Room', 'required');
 
-			$userData = array(
-				'first_name'=>strip_tags($this->input->post('first_name')),
-				'login'=>strip_tags($this->input->post('login')),
-				'email'=>strip_tags($this->input->post('email')),
-				'password'=>md5($this->input->post('password'))
-			);
+			if ($this->form_validation->run() == true) {
+				$adresData = array(
+					'akademik' => $this->input->post('academic'),
+					'nr_pokoju' => $this->input->post('room')
+				);
 
-			if($this->form_validation->run() == true)
-			{
+				$insertAdres = $this->user_model->insertAdres($adresData);
+
+				$userData = array(
+					'first_name' => strip_tags($this->input->post('first_name')),
+					'login' => strip_tags($this->input->post('login')),
+					'email' => strip_tags($this->input->post('email')),
+					'password' => md5($this->input->post('password')),
+					'id_adresu' => strip_tags($insertAdres)
+				);
 				$insert = $this->user_model->insert($userData);
-				if($insert)
-				{
-					$this->session->set_userdata('success_msg','Konto utworzone');
+				if ($insert) {
+					$this->session->set_userdata('success_msg', 'Konto utworzone');
 					redirect('user/login');
-				}
-				else
-				{
+				} else {
 					$data['error_msg'] = 'Error!';
 				}
 

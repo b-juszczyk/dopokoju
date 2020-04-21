@@ -1,3 +1,14 @@
+<div class="flex-grow-1 text-center" style="color:#ceaa63">
+	<?php
+	if ($this->session->has_userdata('success_msg')) {
+		echo '<p>' . $this->session->userdata('success_msg') . '</p>';
+		$this->session->unset_userdata('success_msg');
+	} elseif ($this->session->has_userdata('error_msg')) {
+		echo '<p>' . $this->session->userdata('error_msg') . '</p>';
+		$this->session->unset_userdata('error_msg');
+	}
+	?>
+</div>
 <div class="container-fluid">
 	<div class="card mt-2 border-0">
 		<div class="card-header" style="color:#ceaa63; background-color: #231f20">
@@ -18,7 +29,7 @@
 					<div class="row" style="color: #ceaa63">
 						<div class="col-12 col-sm-12 col-md-2 text-center">
 							<img class="img-fluid"
-								 src="../../../user_guide/_images/oferta/<?php echo $item['zdjecie']; ?>" alt="prewiew"
+								 src="../../../user_guide/_images/oferta/<?php echo $item['zdjecie']; ?>" alt="preview"
 								 width="120" height="80">
 						</div>
 						<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">

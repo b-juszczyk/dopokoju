@@ -11,7 +11,6 @@ class Oferta extends CI_Controller
 
 	public function index()
 	{
-
 		$data = array(
 			'oferta' => $this->oferta_model->getOferta(),
 			'logged' => $this->session->userdata('isUserLoggedIn'),

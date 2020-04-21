@@ -10,7 +10,7 @@ if (!empty($success_msg)) {
 	<div class="d-flex h-100">
 		<div class="m-auto w-25">
 			<h2>Podaj wymagane dane</h2>
-			<form action="<?php echo site_url('cart/summary') ?>" method="post">
+			<form action="" method="post">
 				<div class="form-group">
 					<label for="name">Imię</label>
 					<input type="text" class="form-control" name="name"
@@ -36,17 +36,21 @@ if (!empty($success_msg)) {
 					<?php echo form_error('phone', '<p class="alert-warning mt-1">', '</p>'); ?>
 				</div>
 				<div class="form-group">
+					<label for="uwagi">Uwagi do zamówienia</label>
+					<textarea class="form-control" name="uwagi"></textarea>
+				</div>
+				<div class="form-group">
 					Dostawa do pokoju?<br>
 					<input type="checkbox" class="form-control-sm" id="dostawa">
 				</div>
 				<div class="form-group" id="adres" style="display: none">
 					<div class="form-group">
 						<label for="academic">Akademik</label>
-						<input type="text" class="form-control" id="academic">
+						<input type="text" class="form-control" id="academic" name="academic">
 					</div>
 					<div class="form-group">
 						<label for="room">Numer pokoju</label>
-						<input type="text" class="form-control" id="room">
+						<input type="text" class="form-control" id="room" name="room">
 					</div>
 				</div>
 				<div class="form-group">

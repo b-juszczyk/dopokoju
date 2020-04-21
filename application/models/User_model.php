@@ -59,15 +59,55 @@ class User_model extends CI_Model
 	{
 		if(!empty($data))
 		{
-			if(!array_key_exists("created",$data))
-			{
+			if(!array_key_exists("created",$data)) {
 				$data['created'] = date("Y-m-d H:i:s");
 			}
 
 			$insert = $this->db->insert($this->table, $data);
 
-			return $insert?$this->db->insert_id():false;
+			return $insert ? $this->db->insert_id() : false;
 		}
 		return false;
+	}
+
+	public function insertNewCustomer($data = array())
+	{
+		if (!empty($data)) {
+			$insert = $this->db->insert('niezalogowani', $data);
+
+			return $insert ? $this->db->insert_id() : false;
+		}
+		return false;
+	}
+
+	public function insertAdres($data)
+	{
+		if (!empty($data)) {
+			$query = $this->db->query('SELECT * FROM adresy WHERE akademik="' . $data['akademik'] . '" AND nr_pokoju="' . $data['nr_pokoju'] . '"');
+			if ($query->num_rows() == 0) {
+				$this->db->insert('adresy', $data);
+				return $this->db->insert_id();
+			} else {
+				$result = $query->row();
+				return $result->id_adresu;
+			}
+		}
+		return false;
+	}
+
+	public function getUsersAcademics($userId)
+	{
+		$query = $this->db->query('SELECT akademik FROM adresy WHERE id_uzytkownika="' . $userId . '"');
+		$result = $query->result_array();
+
+		return $result;
+	}
+
+	public function getUsersRooms($userId)
+	{
+		$query = $this->db->query('SELECT nr_pokoju FROM adresy WHERE id_uzytkownika="' . $userId . '"');
+		$result = $query->result_array();
+
+		return $result;
 	}
 }

@@ -7,7 +7,6 @@
 	<meta name="description" content="Aplikacja do zamawiania jedzenia na terenie Politechniki Rzeszowskiej">
 	<title>Do Pokoju</title>
 
-	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="../../user_guide/_static/css/simple-sidebar.css"/>
 	<link rel="stylesheet" href="../../user_guide/_static/css/bootstrap.min.css"/>
 	<link rel="icon" type="image/gif" href="<?php echo base_url(); ?>/favicon.gif"/>

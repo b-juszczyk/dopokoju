@@ -34,6 +34,18 @@ if (!empty($success_msg)) {
 						   required>
 					<?php echo form_error('conf_password', '<p class="alert-warning">', '</p>'); ?>
 				</div>
+				<div class="form-group">
+					<input type="text" name="phone" placeholder="Numer telefonu" class="form-control" required>
+					<?php echo form_error('phone', '<p class="alert-warning">', '</p>'); ?>
+				</div>
+				<div class="form-group d-inline-flex">
+					<input type="text" name="academic" placeholder="Akademik" class="form-control" required>
+					<?php echo form_error('academic', '<p class="alert-warning">', '</p>'); ?>
+				</div>
+				<div class="form-group d-inline-flex">
+					<input type="text" name="room" placeholder="Pokoj" class="form-control" required>
+					<?php echo form_error('room', '<p class="alert-warning">', '</p>'); ?>
+				</div>
 				<input type="submit" name="signupSubmit" value="Zarejestruj" class="form-control w-25 btn btn-dark">
 			</form>
 			<p>Masz już konto? <a href="<?php echo base_url('user/login'); ?>">Zaloguj się</a></p>
