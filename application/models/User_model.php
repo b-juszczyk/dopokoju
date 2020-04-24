@@ -97,7 +97,9 @@ class User_model extends CI_Model
 
 	public function getUsersAcademics($userId)
 	{
+
 		$query = $this->db->query('SELECT akademik FROM adresy WHERE id_uzytkownika="' . $userId . '"');
+		/*SQL INJECTION*/
 		$result = $query->result_array();
 
 		return $result;

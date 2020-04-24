@@ -112,7 +112,7 @@ class Cart extends CI_Controller
 			$this->form_validation->set_rules('name', 'Name', 'required');
 			$this->form_validation->set_rules('phone', 'Phone', 'required');
 			$this->form_validation->set_rules('mail', 'Mail', 'required|valid_email');
-
+/* serializacja i deserializacja */
 			if ($this->form_validation->run() == true) {
 				$this->session->set_userdata('name', $this->input->post('name'));
 				$this->session->set_userdata('mail', $this->input->post('mail'));

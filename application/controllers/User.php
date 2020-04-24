@@ -56,6 +56,7 @@ class User extends CI_Controller
 
 		if ($this->input->post('loginSubmit')) {
 			$this->form_validation->set_rules('password', 'Password', 'required');
+			$this->form_validation->set_rules('email', 'Email', 'valid_email|required');
 
 			if ($this->form_validation->run() == true) {
 				$con = array(

@@ -11,7 +11,7 @@ class Oferta_model extends CI_Model
 
 	public function getProdukt($id_wariant)
 	{
-		return $this->db->where('id_oferta', $id_wariant)->get('oferta')->row();
+		return $this->db->where('id_oferta', $this->db->escape($id_wariant))->get('oferta')->row();
 	}
 
 }

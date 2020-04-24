@@ -23,7 +23,7 @@ class Admin extends CI_Controller
 			$this->load->view('admin/' . $cardName, $data);
 			$this->load->view('elements/footer');
 		} else {
-			redirect('/');
+			redirect(base_url());
 		}
 	}
 

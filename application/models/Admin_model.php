@@ -6,8 +6,9 @@ class Admin_model extends CI_Model
 {
 	public function getUsers()
 	{
-		$query = $this->db->query('SELECT id, first_name, login, email FROM users');
+		$query = $this->db->query('SELECT id, first_name, username, email FROM users');
 		return $query->result_array();
 	}
-
 }
+
+?>
